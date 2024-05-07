@@ -1,6 +1,6 @@
 .mx-3 {
   max-width: 1280px;
-  margin: 100px 0px 50px 0px;
+  margin: 140px 0px 50px 0px;
   padding: 2rem;
   text-align: left;
 }
@@ -8,6 +8,10 @@
 body {
   margin: 0;
   background-color: lightblue;
+}
+
+section div p{
+  width: 70px
 }
 
 .nav-link-active {
@@ -22,7 +26,6 @@ body {
 .nav-link {
   color: white;
   text-decoration: none;
-  margin: 5px;
   padding: 5px;
 }
 
@@ -54,6 +57,11 @@ footer a{
   }
 
   .mx-3 {
-    margin: 30px 0px 50px 0px;
+    margin: 50px 0px 50px 0px;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
   }
 }
