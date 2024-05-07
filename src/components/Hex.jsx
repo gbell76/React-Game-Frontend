@@ -8,14 +8,8 @@ const Hex = (props) => {
         image = playerOne
     }
 
-    const playerOneMove = props.playerOneStats.move
-    const playerOneRange = props.playerOneStats.range
-
-    const playerTwoMove = props.playerTwoStats.move
-    const playerTwoRange = props.playerTwoStats.range
-
     const log = () => {
-        if (props.playerOneActive) {
+        if (props.playerOneActive === 1) {
             if (props.remainingMoves > 0) {
                 if (props.contains === '') {
                     let distance = Math.abs(props.coordinates[1] - props.playerOneCoordinates[1]) + Math.floor(Math.abs(props.coordinates[0] - props.playerOneCoordinates[0]) / 2)
@@ -24,15 +18,14 @@ const Hex = (props) => {
                     } else if (props.playerOneCoordinates[0] % 2 === 1 && props.coordinates[0] % 2 === 0 && props.coordinates[1] < props.playerOneCoordinates[1]) {
                         distance++
                     }
-                    if (Math.abs(props.coordinates[0] - props.playerOneCoordinates[0]) > playerOneMove) {
+                    if (Math.abs(props.coordinates[0] - props.playerOneCoordinates[0]) > props.playerOneStats.move) {
                         distance = Math.abs(props.coordinates[0] - props.playerOneCoordinates[0])
                     }
-                    if (distance <= playerOneMove) {
+                    if (distance <= props.playerOneStats.move) {
                         props.setPlayerOneCoordinates(props.coordinates)
                         props.setRemainingMoves(props.remainingMoves - 1)
                         if (props.remainingMoves === 1) {
-                            console.log('Turn ended.')
-                            props.setPlayerOneActive(false)
+                            props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
                             props.setRemainingMoves(2)
                         }
                     }
@@ -43,16 +36,15 @@ const Hex = (props) => {
                     } else if (props.playerOneCoordinates[0] % 2 === 1 && props.coordinates[0] % 2 === 0 && props.coordinates[1] < props.playerOneCoordinates[1]) {
                         distance++
                     }
-                    if (Math.abs(props.coordinates[0] - props.playerOneCoordinates[0]) > playerOneRange) {
+                    if (Math.abs(props.coordinates[0] - props.playerOneCoordinates[0]) > props.playerOneStats.range) {
                         distance = Math.abs(props.coordinates[0] - props.playerOneCoordinates[0])
                     }
-                    if (distance <= playerOneRange) {
-                        console.log('Player 2 hit!')
+                    if (distance <= props.playerOneStats.range) {
+                        props.setMessage('Player 2 hit!')
                         props.setPlayerTwoStats({health: props.playerTwoStats.health - props.playerOneStats.damage, range: props.playerTwoStats.range, damage: props.playerTwoStats.damage, move: props.playerTwoStats.move})
                         props.setRemainingMoves(props.remainingMoves - 1)
                         if (props.remainingMoves === 1) {
-                            console.log('Turn ended.')
-                            props.setPlayerOneActive(false)
+                            props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
                             props.setRemainingMoves(2)
                         }
                     }
@@ -67,15 +59,14 @@ const Hex = (props) => {
                     } else if (props.playerTwoCoordinates[0] % 2 === 1 && props.coordinates[0] % 2 === 0 && props.coordinates[1] < props.playerTwoCoordinates[1]) {
                         distance++
                     }
-                    if (Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0]) > playerTwoMove) {
+                    if (Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0]) > props.playerTwoStats.move) {
                         distance = Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0])
                     }
-                    if (distance <= playerTwoMove) {
+                    if (distance <= props.playerTwoStats.move) {
                         props.setPlayerTwoCoordinates(props.coordinates)
                         props.setRemainingMoves(props.remainingMoves - 1)
                         if (props.remainingMoves === 1) {
-                            console.log('Turn ended.')
-                            props.setPlayerOneActive(true)
+                            props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
                             props.setRemainingMoves(2)
                         }
                     }
@@ -86,16 +77,16 @@ const Hex = (props) => {
                     } else if (props.playerTwoCoordinates[0] % 2 === 1 && props.coordinates[0] % 2 === 0 && props.coordinates[1] < props.playerTwoCoordinates[1]) {
                         distance++
                     }
-                    if (Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0]) > playerTwoRange) {
+                    if (Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0]) > props.playerTwoStats.range) {
                         distance = Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0])
                     }
-                    if (distance <= playerTwoRange) {
-                        console.log('Player 1 hit!')
+                    if (distance <= props.playerTwoStats.range) {
+                        props.setMessage('Player 1 hit!')
                         props.setPlayerOneStats({health: props.playerOneStats.health - props.playerTwoStats.damage, range: props.playerOneStats.range, damage: props.playerOneStats.damage, move: props.playerOneStats.move})
                         props.setRemainingMoves(props.remainingMoves - 1)
                         if (props.remainingMoves === 1) {
                             console.log('Turn ended.')
-                            props.setPlayerOneActive(true)
+                            props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
                             props.setRemainingMoves(2)
                         }
                     }

@@ -19,7 +19,7 @@ function NavTabs() {
           className={currentPage === '/' ? 'nav-link-active' : 'nav-link'}
           onClick={logout}
         >
-          {currentPage === '/' ? 'Log In' : 'Log Out'}
+          {currentPage === '/' ? 'LogIn' : 'LogOut'}
         </Link>
       </li>
       <li style={{margin: '5px'}}>
@@ -28,6 +28,30 @@ function NavTabs() {
           className={currentPage === '/Home' ? 'nav-link-active' : 'nav-link'}
         >
           Home
+        </Link>
+      </li>
+      <li style={{margin: '5px'}}>
+        <Link
+          to="/Challenge"
+          className={currentPage === '/Challenge' ? 'nav-link-active' : 'nav-link'}
+        >
+          Challenge
+        </Link>
+      </li>
+      <li style={{margin: '5px'}}>
+        <Link
+          to="/FreeForAll"
+          className={currentPage === '/FreeForAll' ? 'nav-link-active' : 'nav-link'}
+        >
+          FFA
+        </Link>
+      </li>
+      <li style={{margin: '5px'}}>
+        <Link
+          to="/Mayhem"
+          className={currentPage === '/Mayhem' ? 'nav-link-active' : 'nav-link'}
+        >
+          Mayhem
         </Link>
       </li>
     </ul>

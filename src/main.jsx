@@ -4,6 +4,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.jsx';
 import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
+import Challenge from './pages/Challenge.jsx'
+import FreeForAll from './pages/FreeForAll.jsx'
+import Mayhem from './pages/Mayhem.jsx'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +21,18 @@ const router = createBrowserRouter([
         path: '/Home',
         element: <Home />,
       },
+      {
+        path: '/Challenge',
+        element: <Challenge />
+      },
+      {
+        path: '/FreeForAll',
+        element: <FreeForAll />
+      },
+      {
+        path: '/Mayhem',
+        element: <Mayhem />
+      }
     ],
   },
 ]);
