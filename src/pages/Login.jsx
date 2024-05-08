@@ -59,7 +59,7 @@ const Login = () => {
     return (
         <>
             <h1 style={{color: 'black'}}>{hasAccount ? 'Log In' : 'Create Account'}</h1>
-            <button style={{color: 'blue', border: 'none', backgroundColor: 'lightblue'}} onClick={toggleHasAccount}>{hasAccount ? "Don't have an account?" : "Already have an account?"}</button>
+            <button style={{color: 'blue', border: 'none', backgroundColor: 'lightgreen'}} onClick={toggleHasAccount}>{hasAccount ? "Don't have an account?" : "Already have an account?"}</button>
             <h2>Username: </h2>
             <input value={username} onChange={changeUsername}></input>
             <h2>Password: </h2>
