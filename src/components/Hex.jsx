@@ -19,13 +19,13 @@ const Hex = (props) => {
     }
 
     useEffect(() => {
-        if (props.playerOneActive === 1 && props.playerOneStats.health <= 0){
+        if (props.playerOneActive === 1 && props.playerOneStats.health <= 0) {
             props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
         }
-        if (props.playerOneActive === 2 && props.playerTwoStats.health <= 0){
+        if (props.playerOneActive === 2 && props.playerTwoStats.health <= 0) {
             props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
         }
-        if (props.playerOneActive === 3 && props.playerThreeStats.health <= 0){
+        if (props.playerOneActive === 3 && props.playerThreeStats.health <= 0) {
             props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
         }
     }, [props.playerOneActive])
@@ -38,23 +38,25 @@ const Hex = (props) => {
     }, [props.remainingMoves])
 
     useEffect(() => {
-        if(props.playerOneStats.health < 1){
+        if (props.playerOneStats.health < 1) {
             props.setPlayerOneCoordinates([-1, -1])
             props.setMessage("Player 1's robot has been destroyed!")
         }
     }, [props.playerOneStats])
 
     useEffect(() => {
-        if(props.playerTwoStats.health < 1){
+        if (props.playerTwoStats.health < 1) {
             props.setPlayerTwoCoordinates([-1, -1])
             props.setMessage("Player 2's robot has been destroyed!")
         }
     }, [props.playerTwoStats])
 
     useEffect(() => {
-        if(props.playerThreeStats.health < 1){
-            props.setPlayerThreeCoordinates([-1, -1])
-            props.setMessage("Player 3's robot has been destroyed!")
+        if (props.numOfPlayers > 2) {
+            if (props.playerThreeStats.health < 1) {
+                props.setPlayerThreeCoordinates([-1, -1])
+                props.setMessage("Player 3's robot has been destroyed!")
+            }
         }
     }, [props.playerThreeStats])
 
@@ -74,6 +76,7 @@ const Hex = (props) => {
                     if (distance <= props.playerOneStats.move) {
                         props.setPlayerOneCoordinates(props.coordinates)
                         props.setRemainingMoves(props.remainingMoves - 1)
+                        props.setMessage('')
                     } else {
                         props.setMessage('Not enough movement')
                     }
@@ -128,6 +131,7 @@ const Hex = (props) => {
                     if (distance <= props.playerTwoStats.move) {
                         props.setPlayerTwoCoordinates(props.coordinates)
                         props.setRemainingMoves(props.remainingMoves - 1)
+                        props.setMessage('')
                     } else {
                         props.setMessage('Not enough movement')
                     }
@@ -167,7 +171,7 @@ const Hex = (props) => {
                     }
                 }
             }
-        }else if (props.playerOneActive === 3 && props.playerThreeStats.health > 0) {
+        } else if (props.playerOneActive === 3 && props.playerThreeStats.health > 0) {
             if (props.remainingMoves > 0) {
                 if (props.contains === '') {
                     let distance = Math.abs(props.coordinates[1] - props.playerThreeCoordinates[1]) + Math.floor(Math.abs(props.coordinates[0] - props.playerThreeCoordinates[0]) / 2)
@@ -182,6 +186,7 @@ const Hex = (props) => {
                     if (distance <= props.playerThreeStats.move) {
                         props.setPlayerThreeCoordinates(props.coordinates)
                         props.setRemainingMoves(props.remainingMoves - 1)
+                        props.setMessage('')
                         if (props.remainingMoves === 1) {
                             props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
                             props.setRemainingMoves(2)
@@ -225,20 +230,20 @@ const Hex = (props) => {
                     }
                 }
             }
-        }else{
+        } else {
             props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
         }
     }
 
-        return (
-            <>
-                <section style={{ float: 'left', marginLeft: '1.5px', marginBottom: '-13px' }}>
-                    <div style={{ width: '0', borderBottom: '15px solid white', borderLeft: '26px solid transparent', borderRight: '26px solid transparent' }}></div>
-                    <div style={{ width: '52px', height: '30px', backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={log}>{image && <img src={image} style={{ height: '100%', width: 'auto' }}></img>}</div>
-                    <div style={{ width: '0', borderTop: '15px solid white', borderLeft: '26px solid transparent', borderRight: '26px solid transparent' }}></div>
-                </section>
-            </>
-        )
-    }
+    return (
+        <>
+            <section style={{ float: 'left', marginLeft: '1.5px', marginBottom: '-13px' }}>
+                <div style={{ width: '0', borderBottom: '15px solid white', borderLeft: '26px solid transparent', borderRight: '26px solid transparent' }}></div>
+                <div style={{ width: '52px', height: '30px', backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={log}>{image && <img src={image} style={{ height: '100%', width: 'auto' }}></img>}</div>
+                <div style={{ width: '0', borderTop: '15px solid white', borderLeft: '26px solid transparent', borderRight: '26px solid transparent' }}></div>
+            </section>
+        </>
+    )
+}
 
-    export default Hex
+export default Hex
