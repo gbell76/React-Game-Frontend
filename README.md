@@ -1,8 +1,15 @@
-# React + Vite
+# Bot Battle
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+Bot Battle is a simple turn based pvp game featuring robots with stats each player can customize.
 
-Currently, two official plugins are available:
+## Instillation
+N/A
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Usage
+Create an account if you do not have one or log into one if you do. Navigate to the Challenge tab for a 1v1 game, FFA for a 3 player free for all, or Mayhem for a 4 person free for all game. Use the + and - buttons to adjust your stats until you have no more stat points then allow the other players to do the same for their stats. When you see a hex grid, it's time to play! Each player gets 2 actions per turn. Those actions can be to either move up to your move stat in hexes or attack another robot that is within your range. The last player standing wins.
+
+## Link
+
+
+## Screenshots
