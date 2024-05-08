@@ -1,11 +1,20 @@
 import playerOne from '../assets/avatar.jpg'
+import playerTwo from '../assets/avatar2.png'
+import playerThree from '../assets/avatar3.png'
+import playerFour from '../assets/avatar4.jpg'
 
 const Hex = (props) => {
 
     let image = ''
 
-    if (props.contains) {
+    if (props.contains === 'player one') {
         image = playerOne
+    }else if(props.contains === 'player two'){
+        image = playerTwo
+    }else if(props.contains === 'player three'){
+        image = playerThree
+    }else if(props.contains === 'player four'){
+        image = playerFour
     }
 
     const log = () => {
@@ -98,9 +107,9 @@ const Hex = (props) => {
     return (
         <>
             <section style={{ float: 'left', marginLeft: '1.5px', marginBottom: '-13px' }}>
-                <div style={{ width: '0', borderBottom: '15px solid #6C6', borderLeft: '26px solid transparent', borderRight: '26px solid transparent' }}></div>
-                <div style={{ width: '52px', height: '30px', backgroundColor: '#6C6', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={log}>{image && <img src={ image } style={{height: '100%', width: 'auto'}}></img>}</div>
-                <div style={{ width: '0', borderTop: '15px solid #6C6', borderLeft: '26px solid transparent', borderRight: '26px solid transparent' }}></div>
+                <div style={{ width: '0', borderBottom: '15px solid white', borderLeft: '26px solid transparent', borderRight: '26px solid transparent' }}></div>
+                <div style={{ width: '52px', height: '30px', backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center'}} onClick={log}>{image && <img src={ image } style={{height: '100%', width: 'auto'}}></img>}</div>
+                <div style={{ width: '0', borderTop: '15px solid white', borderLeft: '26px solid transparent', borderRight: '26px solid transparent' }}></div>
             </section>
         </>
     )
