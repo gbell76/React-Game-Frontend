@@ -70,7 +70,7 @@ const Hex = (props) => {
                 props.setMessage("Player 4's robot has been destroyed!")
             }
         }
-    })
+    }, [props.playerFourStats])
 
     const log = () => {
         if (props.playerOneActive === 1 && props.playerOneStats.health > 0) {
@@ -122,6 +122,23 @@ const Hex = (props) => {
                     if (distance <= props.playerOneStats.range) {
                         props.setMessage('Player 3 hit!')
                         props.setPlayerThreeStats({ health: props.playerThreeStats.health - props.playerOneStats.damage, range: props.playerThreeStats.range, damage: props.playerThreeStats.damage, move: props.playerThreeStats.move })
+                        props.setRemainingMoves(props.remainingMoves - 1)
+                    } else {
+                        props.setMessage('Out of range')
+                    }
+                } else if (props.contains === 'player four') {
+                    let distance = Math.abs(props.coordinates[1] - props.playerOneCoordinates[1]) + Math.floor(Math.abs(props.coordinates[0] - props.playerOneCoordinates[0]) / 2)
+                    if (props.playerOneCoordinates[0] % 2 === 0 && props.coordinates[0] % 2 === 1 && props.coordinates[1] > props.playerOneCoordinates[1]) {
+                        distance++
+                    } else if (props.playerOneCoordinates[0] % 2 === 1 && props.coordinates[0] % 2 === 0 && props.coordinates[1] < props.playerOneCoordinates[1]) {
+                        distance++
+                    }
+                    if (Math.abs(props.coordinates[0] - props.playerOneCoordinates[0]) > props.playerOneStats.range) {
+                        distance = Math.abs(props.coordinates[0] - props.playerOneCoordinates[0])
+                    }
+                    if (distance <= props.playerOneStats.range) {
+                        props.setMessage('Player 4 hit!')
+                        props.setPlayerFourStats({ health: props.playerFourStats.health - props.playerOneStats.damage, range: props.playerFourStats.range, damage: props.playerFourStats.damage, move: props.playerFourStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
                         props.setMessage('Out of range')
@@ -181,6 +198,23 @@ const Hex = (props) => {
                     } else {
                         props.setMessage('Out of range')
                     }
+                } else if (props.contains === 'player four') {
+                    let distance = Math.abs(props.coordinates[1] - props.playerTwoCoordinates[1]) + Math.floor(Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0]) / 2)
+                    if (props.playerTwoCoordinates[0] % 2 === 0 && props.coordinates[0] % 2 === 1 && props.coordinates[1] > props.playerTwoCoordinates[1]) {
+                        distance++
+                    } else if (props.playerTwoCoordinates[0] % 2 === 1 && props.coordinates[0] % 2 === 0 && props.coordinates[1] < props.playerTwoCoordinates[1]) {
+                        distance++
+                    }
+                    if (Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0]) > props.playerTwoStats.range) {
+                        distance = Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0])
+                    }
+                    if (distance <= props.playerTwoStats.range) {
+                        props.setMessage('Player 4 hit!')
+                        props.setPlayerFourStats({ health: props.playerFourStats.health - props.playerTwoStats.damage, range: props.playerFourStats.range, damage: props.playerFourStats.damage, move: props.playerFourStats.move })
+                        props.setRemainingMoves(props.remainingMoves - 1)
+                    } else {
+                        props.setMessage('Out of range')
+                    }
                 }
             }
         } else if (props.playerOneActive === 3 && props.playerThreeStats.health > 0) {
@@ -193,16 +227,12 @@ const Hex = (props) => {
                         distance++
                     }
                     if (Math.abs(props.coordinates[0] - props.playerThreeCoordinates[0]) > props.playerThreeStats.move) {
-                        distance = Math.abs(props.coordinates[0] - props.playerThreCoordinates[0])
+                        distance = Math.abs(props.coordinates[0] - props.playerThreeCoordinates[0])
                     }
                     if (distance <= props.playerThreeStats.move) {
                         props.setPlayerThreeCoordinates(props.coordinates)
                         props.setRemainingMoves(props.remainingMoves - 1)
                         props.setMessage('')
-                        if (props.remainingMoves === 1) {
-                            props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
-                            props.setRemainingMoves(2)
-                        }
                     } else {
                         props.setMessage('Not enough movement')
                     }
@@ -236,6 +266,95 @@ const Hex = (props) => {
                     if (distance <= props.playerThreeStats.range) {
                         props.setMessage('Player 2 hit!')
                         props.setPlayerTwoStats({ health: props.playerTwoStats.health - props.playerThreeStats.damage, range: props.playerTwoStats.range, damage: props.playerTwoStats.damage, move: props.playerTwoStats.move })
+                        props.setRemainingMoves(props.remainingMoves - 1)
+                    } else {
+                        props.setMessage('Out of range')
+                    }
+                } else if (props.contains === 'player four') {
+                    let distance = Math.abs(props.coordinates[1] - props.playerThreeCoordinates[1]) + Math.floor(Math.abs(props.coordinates[0] - props.playerThreeCoordinates[0]) / 2)
+                    if (props.playerThreeCoordinates[0] % 2 === 0 && props.coordinates[0] % 2 === 1 && props.coordinates[1] > props.playerThreeCoordinates[1]) {
+                        distance++
+                    } else if (props.playerThreeCoordinates[0] % 2 === 1 && props.coordinates[0] % 2 === 0 && props.coordinates[1] < props.playerThreeCoordinates[1]) {
+                        distance++
+                    }
+                    if (Math.abs(props.coordinates[0] - props.playerThreeCoordinates[0]) > props.playerThreeStats.range) {
+                        distance = Math.abs(props.coordinates[0] - props.playerThreeCoordinates[0])
+                    }
+                    if (distance <= props.playerThreeStats.range) {
+                        props.setMessage('Player 4 hit!')
+                        props.setPlayerFourStats({ health: props.playerFourStats.health - props.playerThreeStats.damage, range: props.playerFourStats.range, damage: props.playerFourStats.damage, move: props.playerFourStats.move })
+                        props.setRemainingMoves(props.remainingMoves - 1)
+                    } else {
+                        props.setMessage('Out of range')
+                    }
+                }
+            }
+        } else if (props.playerOneActive === 4 && props.playerFourStats.health > 0) {
+            if (props.remainingMoves > 0) {
+                if (props.contains === '') {
+                    let distance = Math.abs(props.coordinates[1] - props.playerFourCoordinates[1]) + Math.floor(Math.abs(props.coordinates[0] - props.playerFourCoordinates[0]) / 2)
+                    if (props.playerFourCoordinates[0] % 2 === 0 && props.coordinates[0] % 2 === 1 && props.coordinates[1] > props.playerFourCoordinates[1]) {
+                        distance++
+                    } else if (props.playerFourCoordinates[0] % 2 === 1 && props.coordinates[0] % 2 === 0 && props.coordinates[1] < props.playerFourCoordinates[1]) {
+                        distance++
+                    }
+                    if (Math.abs(props.coordinates[0] - props.playerFourCoordinates[0]) > props.playerFourStats.move) {
+                        distance = Math.abs(props.coordinates[0] - props.playerFourCoordinates[0])
+                    }
+                    if (distance <= props.playerFourStats.move) {
+                        props.setPlayerFourCoordinates(props.coordinates)
+                        props.setRemainingMoves(props.remainingMoves - 1)
+                        props.setMessage('')
+                    } else {
+                        props.setMessage('Not enough movement')
+                    }
+                } else if (props.contains === 'player one') {
+                    let distance = Math.abs(props.coordinates[1] - props.playerFourCoordinates[1]) + Math.floor(Math.abs(props.coordinates[0] - props.playerFourCoordinates[0]) / 2)
+                    if (props.playerFourCoordinates[0] % 2 === 0 && props.coordinates[0] % 2 === 1 && props.coordinates[1] > props.playerFourCoordinates[1]) {
+                        distance++
+                    } else if (props.playerFourCoordinates[0] % 2 === 1 && props.coordinates[0] % 2 === 0 && props.coordinates[1] < props.playerFourCoordinates[1]) {
+                        distance++
+                    }
+                    if (Math.abs(props.coordinates[0] - props.playerFourCoordinates[0]) > props.playerFourStats.range) {
+                        distance = Math.abs(props.coordinates[0] - props.playerFourCoordinates[0])
+                    }
+                    if (distance <= props.playerFourStats.range) {
+                        props.setMessage('Player 1 hit!')
+                        props.setPlayerOneStats({ health: props.playerOneStats.health - props.playerFourStats.damage, range: props.playerOneStats.range, damage: props.playerOneStats.damage, move: props.playerOneStats.move })
+                        props.setRemainingMoves(props.remainingMoves - 1)
+                    } else {
+                        props.setMessage('Out of range')
+                    }
+                } else if (props.contains === 'player two') {
+                    let distance = Math.abs(props.coordinates[1] - props.playerFourCoordinates[1]) + Math.floor(Math.abs(props.coordinates[0] - props.playerFourCoordinates[0]) / 2)
+                    if (props.playerFourCoordinates[0] % 2 === 0 && props.coordinates[0] % 2 === 1 && props.coordinates[1] > props.playerFourCoordinates[1]) {
+                        distance++
+                    } else if (props.playerFourCoordinates[0] % 2 === 1 && props.coordinates[0] % 2 === 0 && props.coordinates[1] < props.playerFourCoordinates[1]) {
+                        distance++
+                    }
+                    if (Math.abs(props.coordinates[0] - props.playerFourCoordinates[0]) > props.playerFourStats.range) {
+                        distance = Math.abs(props.coordinates[0] - props.playerFourCoordinates[0])
+                    }
+                    if (distance <= props.playerFourStats.range) {
+                        props.setMessage('Player 2 hit!')
+                        props.setPlayerTwoStats({ health: props.playerTwoStats.health - props.playerFourStats.damage, range: props.playerTwoStats.range, damage: props.playerTwoStats.damage, move: props.playerTwoStats.move })
+                        props.setRemainingMoves(props.remainingMoves - 1)
+                    } else {
+                        props.setMessage('Out of range')
+                    }
+                } else if (props.contains === 'player three') {
+                    let distance = Math.abs(props.coordinates[1] - props.playerFourCoordinates[1]) + Math.floor(Math.abs(props.coordinates[0] - props.playerFourCoordinates[0]) / 2)
+                    if (props.playerFourCoordinates[0] % 2 === 0 && props.coordinates[0] % 2 === 1 && props.coordinates[1] > props.playerFourCoordinates[1]) {
+                        distance++
+                    } else if (props.playerFourCoordinates[0] % 2 === 1 && props.coordinates[0] % 2 === 0 && props.coordinates[1] < props.playerFourCoordinates[1]) {
+                        distance++
+                    }
+                    if (Math.abs(props.coordinates[0] - props.playerFourCoordinates[0]) > props.playerFourStats.range) {
+                        distance = Math.abs(props.coordinates[0] - props.playerFourCoordinates[0])
+                    }
+                    if (distance <= props.playerFourStats.range) {
+                        props.setMessage('Player 3 hit!')
+                        props.setPlayerThreeStats({ health: props.playerThreeStats.health - props.playerFourStats.damage, range: props.playerThreeStats.range, damage: props.playerThreeStats.damage, move: props.playerThreeStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
                         props.setMessage('Out of range')
