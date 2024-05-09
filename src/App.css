@@ -5,6 +5,10 @@
   text-align: left;
 }
 
+ul{
+  padding: 0px
+}
+
 body {
   margin: 0;
   background-color: lightgreen;
