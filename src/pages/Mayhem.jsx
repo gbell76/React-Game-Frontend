@@ -193,7 +193,7 @@ const Mayhem = () => {
                                 </section> :
                                 <section>
                                     <h2>{playerOneStats.health > 0 ? 'Player 1 wins!' : playerTwoStats.health > 0 ? 'Player 2 wins!' : playerThreeStats.health > 0 ? 'Player 3 wins!' : 'Player 4 wins!'}</h2>
-                                    <button onClick={() => { setPlayerOneCoordinates([6, 0]); setPlayerTwoCoordinates([0, 0]); setPlayerThreeCoordinates([0, 4]); setPlayerFourCoordinates([6, 4]); setPlayerOneActive(1); setRemainingMoves(2); setPlayerOneStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerOneRemainingStatPoints(5); setPlayerTwoStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerTwoRemainingStatPoints(5); setPlayerThreeStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerThreeRemainingStatPoints(5); setPlayerFourStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerFourRemainingStatsPoints(5); setMessage('') }}>Play Again</button>
+                                    <button onClick={() => { setPlayerOneCoordinates([6, 0]); setPlayerTwoCoordinates([0, 0]); setPlayerThreeCoordinates([0, 4]); setPlayerFourCoordinates([6, 4]); setPlayerOneActive(1); setRemainingMoves(2); setPlayerOneStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerOneRemainingStatPoints(5); setPlayerTwoStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerTwoRemainingStatPoints(5); setPlayerThreeStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerThreeRemainingStatPoints(5); setPlayerFourStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerFourRemainingStatPoints(5); setMessage('') }}>Play Again</button>
                                 </section>
             }
         </>
