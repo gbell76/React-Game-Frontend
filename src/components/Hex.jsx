@@ -28,6 +28,9 @@ const Hex = (props) => {
         if (props.playerOneActive === 3 && props.playerThreeStats.health <= 0) {
             props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
         }
+        if (props.playerOneActive === 4 && props.playerFourStats.health <= 0) {
+            props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
+        }
     }, [props.playerOneActive])
 
     useEffect(() => {
@@ -59,6 +62,15 @@ const Hex = (props) => {
             }
         }
     }, [props.playerThreeStats])
+
+    useEffect(() => {
+        if (props.numOfPlayers > 3) {
+            if (props.playerFourStats.health < 1) {
+                props.setPlayerFourCoordinates([-1, -1])
+                props.setMessage("Player 4's robot has been destroyed!")
+            }
+        }
+    })
 
     const log = () => {
         if (props.playerOneActive === 1 && props.playerOneStats.health > 0) {
@@ -230,8 +242,6 @@ const Hex = (props) => {
                     }
                 }
             }
-        } else {
-            props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
         }
     }
 

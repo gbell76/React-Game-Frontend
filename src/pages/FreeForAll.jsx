@@ -142,7 +142,7 @@ const FreeForAll = () => {
                             </div>
                             <img src={playerThree} style={{ width: '240px', height: 'auto' }}></img>
                         </section> :
-                        (playerOneStats.health > 0 && playerTwoStats.health > 0) ||  (playerOneStats.health > 0 && playerThreeStats.health > 0) || (playerTwoStats.health > 0 && playerThreeStats.health > 0) > 0 ?
+                        (playerOneStats.health > 0 && playerTwoStats.health > 0) || (playerOneStats.health > 0 && playerThreeStats.health > 0) || (playerTwoStats.health > 0 && playerThreeStats.health > 0) ?
                             <section>
                                 <h2>{playerOneActive === 1 ? "Player 1's turn" : playerOneActive === 2 ? "Player 2's turn" : "Player 3's turn"}</h2>
                                 {columnArray.map((i) =>
