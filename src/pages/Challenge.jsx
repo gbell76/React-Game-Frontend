@@ -11,19 +11,20 @@ const Challenge = () => {
         Auth.checkLoggedIn()
     }, [])
 
-    const rows = 7
-    const columns = 5
+    const rows = parseInt(localStorage.getItem('rows'))
+    const columns = parseInt(localStorage.getItem('columns'))
     const columnArray = []
 
-    const [playerOneCoordinates, setPlayerOneCoordinates] = useState([6, 2])
-    const [playerTwoCoordinates, setPlayerTwoCoordinates] = useState([0, 2])
+    const [playerOneCoordinates, setPlayerOneCoordinates] = useState([parseInt(localStorage.getItem('rows')) - 1, Math.floor(parseInt(localStorage.getItem('columns')) / 2)])
+    const [playerTwoCoordinates, setPlayerTwoCoordinates] = useState([0, Math.floor(parseInt(localStorage.getItem('columns')) / 2)])
     const [playerOneActive, setPlayerOneActive] = useState(1)
-    const [remainingMoves, setRemainingMoves] = useState(2)
+    const [remainingMoves, setRemainingMoves] = useState(parseInt(localStorage.getItem('actionPoints')))
     const [playerOneStats, setPlayerOneStats] = useState({ move: 1, range: 1, damage: 1, health: 1 })
-    const [playerOneRemainingStatPoints, setPlayerOneRemainingStatPoints] = useState(5)
+    const [playerOneRemainingStatPoints, setPlayerOneRemainingStatPoints] = useState(parseInt(localStorage.getItem('statPoints')))
     const [playerTwoStats, setPlayerTwoStats] = useState({ move: 1, range: 1, damage: 1, health: 1 })
-    const [playerTwoRemainingStatPoints, setPlayerTwoRemainingStatPoints] = useState(5)
+    const [playerTwoRemainingStatPoints, setPlayerTwoRemainingStatPoints] = useState(parseInt(localStorage.getItem('statPoints')))
     const [message, setMessage] = useState('')
+    const [hover, setHover] = useState('Hovering over: ')
     const numOfPlayers = 2
 
     for (let i = 0; i < rows; i++) {
@@ -108,16 +109,17 @@ const Challenge = () => {
                     playerOneStats.health > 0 && playerTwoStats.health > 0 ?
                         <section>
                             <h2>{playerOneActive === 1 ? "Player 1's turn" : "Player 2's turn"}</h2>
+                            <p>{hover}</p>
                             {columnArray.map((i) =>
                                 <div key={i[0].coordinates} style={{ display: 'flex', flexDirection: 'row', marginLeft: i[0].coordinates[0] % 2 === 0 ? '0px' : '26.5px' }}>
-                                    {i.map((j) => <Hex coordinates={j.coordinates} contains={j.contains} numOfPlayers={numOfPlayers} setMessage={setMessage} playerOneCoordinates={playerOneCoordinates} setPlayerOneCoordinates={setPlayerOneCoordinates} playerTwoCoordinates={playerTwoCoordinates} setPlayerTwoCoordinates={setPlayerTwoCoordinates} remainingMoves={remainingMoves} setRemainingMoves={setRemainingMoves} playerOneActive={playerOneActive} setPlayerOneActive={setPlayerOneActive} playerOneStats={playerOneStats} playerTwoStats={playerTwoStats} setPlayerOneStats={setPlayerOneStats} setPlayerTwoStats={setPlayerTwoStats} key={j.coordinates} />)}
+                                    {i.map((j) => <Hex coordinates={j.coordinates} contains={j.contains} numOfPlayers={numOfPlayers} setMessage={setMessage} setHover={setHover} playerOneCoordinates={playerOneCoordinates} setPlayerOneCoordinates={setPlayerOneCoordinates} playerTwoCoordinates={playerTwoCoordinates} setPlayerTwoCoordinates={setPlayerTwoCoordinates} remainingMoves={remainingMoves} setRemainingMoves={setRemainingMoves} playerOneActive={playerOneActive} setPlayerOneActive={setPlayerOneActive} playerOneStats={playerOneStats} playerTwoStats={playerTwoStats} setPlayerOneStats={setPlayerOneStats} setPlayerTwoStats={setPlayerTwoStats} key={j.coordinates} />)}
                                 </div>
                             )}
                             <p>{message}</p>
                         </section> :
                         <section>
                             <h2>{playerOneStats.health > 0 ? 'Player 1 wins!' : 'Player 2 wins!'}</h2>
-                            <button onClick={() => { setPlayerOneCoordinates([6, 2]); setPlayerTwoCoordinates([0, 2]); setPlayerOneActive(1); setRemainingMoves(2); setPlayerOneStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerOneRemainingStatPoints(5); setPlayerTwoStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerTwoRemainingStatPoints(5); setMessage('') }}>Play Again</button>
+                            <button onClick={() => { setPlayerOneCoordinates([parseInt(localStorage.getItem('rows')) - 1, Math.floor(parseInt(localStorage.getItem('columns')) / 2)]); setPlayerTwoCoordinates([0, Math.floor(parseInt(localStorage.getItem('columns')) / 2)]); setPlayerOneActive(1); setRemainingMoves(parseInt(localStorage.getItem('actionPoints'))); setPlayerOneStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerOneRemainingStatPoints(parseInt(localStorage.getItem('statPoints'))); setPlayerTwoStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerTwoRemainingStatPoints(parseInt(localStorage.getItem('statPoints'))); setMessage(''); setHover('Hovering over: ') }}>Play Again</button>
                         </section>
             }
         </>

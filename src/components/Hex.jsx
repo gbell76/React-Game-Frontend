@@ -36,7 +36,7 @@ const Hex = (props) => {
     useEffect(() => {
         if (props.remainingMoves === 0) {
             props.setPlayerOneActive((props.playerOneActive % props.numOfPlayers) + 1)
-            props.setRemainingMoves(2)
+            props.setRemainingMoves(parseInt(localStorage.getItem('actionPoints')))
         }
     }, [props.remainingMoves])
 
@@ -103,7 +103,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerOneCoordinates[0])
                     }
                     if (distance <= props.playerOneStats.range) {
-                        props.setMessage('Player 2 hit!')
+                        props.setMessage('Player 2 has been hit!')
                         props.setPlayerTwoStats({ health: props.playerTwoStats.health - props.playerOneStats.damage, range: props.playerTwoStats.range, damage: props.playerTwoStats.damage, move: props.playerTwoStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -120,7 +120,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerOneCoordinates[0])
                     }
                     if (distance <= props.playerOneStats.range) {
-                        props.setMessage('Player 3 hit!')
+                        props.setMessage('Player 3 has been hit!')
                         props.setPlayerThreeStats({ health: props.playerThreeStats.health - props.playerOneStats.damage, range: props.playerThreeStats.range, damage: props.playerThreeStats.damage, move: props.playerThreeStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -137,7 +137,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerOneCoordinates[0])
                     }
                     if (distance <= props.playerOneStats.range) {
-                        props.setMessage('Player 4 hit!')
+                        props.setMessage('Player 4 has been hit!')
                         props.setPlayerFourStats({ health: props.playerFourStats.health - props.playerOneStats.damage, range: props.playerFourStats.range, damage: props.playerFourStats.damage, move: props.playerFourStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -175,7 +175,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0])
                     }
                     if (distance <= props.playerTwoStats.range) {
-                        props.setMessage('Player 1 hit!')
+                        props.setMessage('Player 1 has been hit!')
                         props.setPlayerOneStats({ health: props.playerOneStats.health - props.playerTwoStats.damage, range: props.playerOneStats.range, damage: props.playerOneStats.damage, move: props.playerOneStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -192,7 +192,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0])
                     }
                     if (distance <= props.playerTwoStats.range) {
-                        props.setMessage('Player 3 hit!')
+                        props.setMessage('Player 3 has been hit!')
                         props.setPlayerThreeStats({ health: props.playerThreeStats.health - props.playerTwoStats.damage, range: props.playerThreeStats.range, damage: props.playerThreeStats.damage, move: props.playerThreeStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -209,7 +209,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerTwoCoordinates[0])
                     }
                     if (distance <= props.playerTwoStats.range) {
-                        props.setMessage('Player 4 hit!')
+                        props.setMessage('Player 4 has been hit!')
                         props.setPlayerFourStats({ health: props.playerFourStats.health - props.playerTwoStats.damage, range: props.playerFourStats.range, damage: props.playerFourStats.damage, move: props.playerFourStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -247,7 +247,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerThreeCoordinates[0])
                     }
                     if (distance <= props.playerThreeStats.range) {
-                        props.setMessage('Player 1 hit!')
+                        props.setMessage('Player 1 has been hit!')
                         props.setPlayerOneStats({ health: props.playerOneStats.health - props.playerThreeStats.damage, range: props.playerOneStats.range, damage: props.playerOneStats.damage, move: props.playerOneStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -264,7 +264,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerThreeCoordinates[0])
                     }
                     if (distance <= props.playerThreeStats.range) {
-                        props.setMessage('Player 2 hit!')
+                        props.setMessage('Player 2 has been hit!')
                         props.setPlayerTwoStats({ health: props.playerTwoStats.health - props.playerThreeStats.damage, range: props.playerTwoStats.range, damage: props.playerTwoStats.damage, move: props.playerTwoStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -281,7 +281,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerThreeCoordinates[0])
                     }
                     if (distance <= props.playerThreeStats.range) {
-                        props.setMessage('Player 4 hit!')
+                        props.setMessage('Player 4 has been hit!')
                         props.setPlayerFourStats({ health: props.playerFourStats.health - props.playerThreeStats.damage, range: props.playerFourStats.range, damage: props.playerFourStats.damage, move: props.playerFourStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -319,7 +319,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerFourCoordinates[0])
                     }
                     if (distance <= props.playerFourStats.range) {
-                        props.setMessage('Player 1 hit!')
+                        props.setMessage('Player 1 has been hit!')
                         props.setPlayerOneStats({ health: props.playerOneStats.health - props.playerFourStats.damage, range: props.playerOneStats.range, damage: props.playerOneStats.damage, move: props.playerOneStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -336,7 +336,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerFourCoordinates[0])
                     }
                     if (distance <= props.playerFourStats.range) {
-                        props.setMessage('Player 2 hit!')
+                        props.setMessage('Player 2 has been hit!')
                         props.setPlayerTwoStats({ health: props.playerTwoStats.health - props.playerFourStats.damage, range: props.playerTwoStats.range, damage: props.playerTwoStats.damage, move: props.playerTwoStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -353,7 +353,7 @@ const Hex = (props) => {
                         distance = Math.abs(props.coordinates[0] - props.playerFourCoordinates[0])
                     }
                     if (distance <= props.playerFourStats.range) {
-                        props.setMessage('Player 3 hit!')
+                        props.setMessage('Player 3 has been hit!')
                         props.setPlayerThreeStats({ health: props.playerThreeStats.health - props.playerFourStats.damage, range: props.playerThreeStats.range, damage: props.playerThreeStats.damage, move: props.playerThreeStats.move })
                         props.setRemainingMoves(props.remainingMoves - 1)
                     } else {
@@ -368,7 +368,7 @@ const Hex = (props) => {
         <>
             <section style={{ float: 'left', marginLeft: '1.5px', marginBottom: '-13px' }}>
                 <div style={{ width: '0', borderBottom: '15px solid white', borderLeft: '26px solid transparent', borderRight: '26px solid transparent' }}></div>
-                <div style={{ width: '52px', height: '30px', backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={log}>{image && <img src={image} style={{ height: '100%', width: 'auto' }}></img>}</div>
+                <div onTouchStart={() => props.setHover('Hovering over: ' + props.contains)} onTouchEnd={() => { props.setHover('Hovering over: '); props.setMessage('') }} onMouseEnter={() => props.setHover('Hovering over: ' + props.contains)} onMouseLeave={() => { props.setHover('Hovering over: '); props.setMessage('') }} style={{ width: '52px', height: '30px', backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={log}>{image && <img src={image} style={{ height: '100%', width: 'auto' }}></img>}</div>
                 <div style={{ width: '0', borderTop: '15px solid white', borderLeft: '26px solid transparent', borderRight: '26px solid transparent' }}></div>
             </section>
         </>

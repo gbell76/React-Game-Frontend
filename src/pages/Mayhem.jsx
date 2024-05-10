@@ -13,32 +13,33 @@ const Mayhem = () => {
         Auth.checkLoggedIn()
     }, [])
 
-    const rows = 7
-    const columns = 5
+    const rows = parseInt(localStorage.getItem('rows'))
+    const columns = parseInt(localStorage.getItem('columns'))
     const columnArray = []
 
-    const [playerOneCoordinates, setPlayerOneCoordinates] = useState([6, 0])
+    const [playerOneCoordinates, setPlayerOneCoordinates] = useState([parseInt(localStorage.getItem('rows')) - 1, 0])
     const [playerTwoCoordinates, setPlayerTwoCoordinates] = useState([0, 0])
-    const [playerThreeCoordinates, setPlayerThreeCoordinates] = useState([0, 4])
-    const [playerFourCoordinates, setPlayerFourCoordinates] = useState([6, 4])
+    const [playerThreeCoordinates, setPlayerThreeCoordinates] = useState([0, parseInt(localStorage.getItem('columns')) - 1])
+    const [playerFourCoordinates, setPlayerFourCoordinates] = useState([parseInt(localStorage.getItem('rows')) - 1, parseInt(localStorage.getItem('columns')) - 1])
     const [playerOneActive, setPlayerOneActive] = useState(1)
-    const [remainingMoves, setRemainingMoves] = useState(2)
+    const [remainingMoves, setRemainingMoves] = useState(parseInt(localStorage.getItem('actionPoints')))
     const [playerOneStats, setPlayerOneStats] = useState({ move: 1, range: 1, damage: 1, health: 1 })
-    const [playerOneRemainingStatPoints, setPlayerOneRemainingStatPoints] = useState(5)
+    const [playerOneRemainingStatPoints, setPlayerOneRemainingStatPoints] = useState(parseInt(localStorage.getItem('statPoints')))
     const [playerTwoStats, setPlayerTwoStats] = useState({ move: 1, range: 1, damage: 1, health: 1 })
-    const [playerTwoRemainingStatPoints, setPlayerTwoRemainingStatPoints] = useState(5)
+    const [playerTwoRemainingStatPoints, setPlayerTwoRemainingStatPoints] = useState(parseInt(localStorage.getItem('statPoints')))
     const [playerThreeStats, setPlayerThreeStats] = useState({ move: 1, range: 1, damage: 1, health: 1 })
-    const [playerThreeRemainingStatPoints, setPlayerThreeRemainingStatPoints] = useState(5)
+    const [playerThreeRemainingStatPoints, setPlayerThreeRemainingStatPoints] = useState(parseInt(localStorage.getItem('statPoints')))
     const [playerFourStats, setPlayerFourStats] = useState({ move: 1, range: 1, damage: 1, health: 1 })
-    const [playerFourRemainingStatPoints, setPlayerFourRemainingStatPoints] = useState(5)
+    const [playerFourRemainingStatPoints, setPlayerFourRemainingStatPoints] = useState(parseInt(localStorage.getItem('statPoints')))
     const [message, setMessage] = useState('')
+    const [hover, setHover] = useState('Hovering over: ')
     const numOfPlayers = 4
 
     for (let i = 0; i < rows; i++) {
         const rowArray = []
         for (let j = 0; j < columns; j++) {
             const coordinates = [i, j]
-            rowArray.push({ coordinates, contains: JSON.stringify(playerOneCoordinates) === JSON.stringify(coordinates) ? 'player one' : JSON.stringify(playerTwoCoordinates) === JSON.stringify(coordinates) ? 'player two' : JSON.stringify(playerThreeCoordinates) === JSON.stringify(coordinates) ? 'player three' : JSON.stringify(playerFourCoordinates) === JSON.stringify(coordinates)? 'player four' : '' })
+            rowArray.push({ coordinates, contains: JSON.stringify(playerOneCoordinates) === JSON.stringify(coordinates) ? 'player one' : JSON.stringify(playerTwoCoordinates) === JSON.stringify(coordinates) ? 'player two' : JSON.stringify(playerThreeCoordinates) === JSON.stringify(coordinates) ? 'player three' : JSON.stringify(playerFourCoordinates) === JSON.stringify(coordinates) ? 'player four' : '' })
         }
         columnArray.push(rowArray)
     }
@@ -184,16 +185,17 @@ const Mayhem = () => {
                             (playerOneStats.health > 0 && playerTwoStats.health > 0) || (playerOneStats.health > 0 && playerThreeStats.health > 0) || (playerOneStats.health > 0 && playerFourStats.health > 0) || (playerTwoStats.health > 0 && playerThreeStats.health > 0) || (playerTwoStats.health > 0 && playerFourStats.health > 0) || (playerThreeStats.health > 0 && playerFourStats.health > 0) ?
                                 <section>
                                     <h2>{playerOneActive === 1 ? "Player 1's turn" : playerOneActive === 2 ? "Player 2's turn" : playerOneActive === 3 ? "Player 3's turn" : "Player 4's turn"}</h2>
+                                    <p>{hover}</p>
                                     {columnArray.map((i) =>
                                         <div key={i[0].coordinates} style={{ display: 'flex', flexDirection: 'row', marginLeft: i[0].coordinates[0] % 2 === 0 ? '0px' : '26.5px' }}>
-                                            {i.map((j) => <Hex coordinates={j.coordinates} contains={j.contains} numOfPlayers={numOfPlayers} setMessage={setMessage} playerOneCoordinates={playerOneCoordinates} setPlayerOneCoordinates={setPlayerOneCoordinates} playerTwoCoordinates={playerTwoCoordinates} setPlayerTwoCoordinates={setPlayerTwoCoordinates} playerThreeCoordinates={playerThreeCoordinates} setPlayerThreeCoordinates={setPlayerThreeCoordinates} playerFourCoordinates={playerFourCoordinates} setPlayerFourCoordinates={setPlayerFourCoordinates} remainingMoves={remainingMoves} setRemainingMoves={setRemainingMoves} playerOneActive={playerOneActive} setPlayerOneActive={setPlayerOneActive} playerOneStats={playerOneStats} playerTwoStats={playerTwoStats} playerThreeStats={playerThreeStats} playerFourStats={playerFourStats} setPlayerOneStats={setPlayerOneStats} setPlayerTwoStats={setPlayerTwoStats} setPlayerThreeStats={setPlayerThreeStats} setPlayerFourStats={setPlayerFourStats} key={j.coordinates} />)}
+                                            {i.map((j) => <Hex coordinates={j.coordinates} contains={j.contains} numOfPlayers={numOfPlayers} setMessage={setMessage} setHover={setHover} playerOneCoordinates={playerOneCoordinates} setPlayerOneCoordinates={setPlayerOneCoordinates} playerTwoCoordinates={playerTwoCoordinates} setPlayerTwoCoordinates={setPlayerTwoCoordinates} playerThreeCoordinates={playerThreeCoordinates} setPlayerThreeCoordinates={setPlayerThreeCoordinates} playerFourCoordinates={playerFourCoordinates} setPlayerFourCoordinates={setPlayerFourCoordinates} remainingMoves={remainingMoves} setRemainingMoves={setRemainingMoves} playerOneActive={playerOneActive} setPlayerOneActive={setPlayerOneActive} playerOneStats={playerOneStats} playerTwoStats={playerTwoStats} playerThreeStats={playerThreeStats} playerFourStats={playerFourStats} setPlayerOneStats={setPlayerOneStats} setPlayerTwoStats={setPlayerTwoStats} setPlayerThreeStats={setPlayerThreeStats} setPlayerFourStats={setPlayerFourStats} key={j.coordinates} />)}
                                         </div>
                                     )}
                                     <p>{message}</p>
                                 </section> :
                                 <section>
                                     <h2>{playerOneStats.health > 0 ? 'Player 1 wins!' : playerTwoStats.health > 0 ? 'Player 2 wins!' : playerThreeStats.health > 0 ? 'Player 3 wins!' : 'Player 4 wins!'}</h2>
-                                    <button onClick={() => { setPlayerOneCoordinates([6, 0]); setPlayerTwoCoordinates([0, 0]); setPlayerThreeCoordinates([0, 4]); setPlayerFourCoordinates([6, 4]); setPlayerOneActive(1); setRemainingMoves(2); setPlayerOneStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerOneRemainingStatPoints(5); setPlayerTwoStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerTwoRemainingStatPoints(5); setPlayerThreeStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerThreeRemainingStatPoints(5); setPlayerFourStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerFourRemainingStatPoints(5); setMessage('') }}>Play Again</button>
+                                    <button onClick={() => { setPlayerOneCoordinates([parseInt(localStorage.getItem('rows')) - 1, 0]); setPlayerTwoCoordinates([0, 0]); setPlayerThreeCoordinates([0, parseInt(localStorage.getItem('columns')) - 1]); setPlayerFourCoordinates([parseInt(localStorage.getItem('rows')) - 1, parseInt(localStorage.getItem('columns')) - 1]); setPlayerOneActive(1); setRemainingMoves(parseInt(localStorage.getItem('actionPoints'))); setPlayerOneStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerOneRemainingStatPoints(parseInt(localStorage.getItem('statPoints'))); setPlayerTwoStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerTwoRemainingStatPoints(parseInt(localStorage.getItem('statPoints'))); setPlayerThreeStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerThreeRemainingStatPoints(parseInt(localStorage.getItem('statPoints'))); setPlayerFourStats({ move: 1, range: 1, damage: 1, health: 1 }); setPlayerFourRemainingStatPoints(parseInt(localStorage.getItem('statPoints'))); setMessage(''); setHover('Hovering over: ') }}>Play Again</button>
                                 </section>
             }
         </>
