@@ -10,6 +10,7 @@ const Home = () => {
     const [columns, setColumns] = useState()
     const [statPoints, setStatPoints] = useState()
     const [actionPoints, setActionPoints] = useState()
+    const [warning, setWarning] = useState('')
 
     const toggle = () => {
         setRows(user[0].preferences.rows)
@@ -20,19 +21,24 @@ const Home = () => {
     }
 
     const submit = async () => {
-        const savePreferences = await fetch(`http://localhost:5000/user/${Auth.getProfile().data._id}`, {
-            method: 'PUT',
-            body: JSON.stringify({ preferences: { rows: rows, columns: columns, statPoints: statPoints, actionPoints: actionPoints } }),
-            headers: { 'Content-Type': 'application/json' }
-        })
-        const response = await fetch(`http://localhost:5000/user/${Auth.getProfile().data._id}`)
-        const data = await response.json()
-        setUser(data)
-        localStorage.setItem('rows', data[0].preferences.rows)
-        localStorage.setItem('columns', data[0].preferences.columns)
-        localStorage.setItem('actionPoints', data[0].preferences.actionPoints)
-        localStorage.setItem('statPoints', data[0].preferences.statPoints)
-        toggle()
+        if (rows > 1 && columns > 1 && actionPoints > 0) {
+            const savePreferences = await fetch(`http://localhost:5000/user/${Auth.getProfile().data._id}`, {
+                method: 'PUT',
+                body: JSON.stringify({ preferences: { rows: rows, columns: columns, statPoints: statPoints, actionPoints: actionPoints } }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            const response = await fetch(`http://localhost:5000/user/${Auth.getProfile().data._id}`)
+            const data = await response.json()
+            setUser(data)
+            localStorage.setItem('rows', data[0].preferences.rows)
+            localStorage.setItem('columns', data[0].preferences.columns)
+            localStorage.setItem('actionPoints', data[0].preferences.actionPoints)
+            localStorage.setItem('statPoints', data[0].preferences.statPoints)
+            setWarning('')
+            toggle()
+        } else {
+            setWarning('Must have at least 2 rows, 2 columns, and 1 action point.')
+        }
     }
 
     useEffect(() => {
@@ -60,20 +66,21 @@ const Home = () => {
                     <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <p>Rows: </p>
-                            <input style={{ height: '50%' }} value={('' + rows).charAt(0) === '0' ? rows : '0' + rows} onChange={(event) => { if (/[0-9]/.test(event.target.value)) { setRows(event.target.value) } }}></input>
+                            <input style={{ height: '50%' }} value={rows} onChange={(event) => { if (/[0-9]/.test(event.target.value)) { setRows(parseInt(event.target.value)) } else if (event.target.value === '') { setRows(0) } }}></input>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <p>Columns: </p>
-                            <input style={{ height: '50%' }} value={('' + columns).charAt(0) === '0' ? columns : '0' + columns} onChange={(event) => { if (/[0-9]/.test(event.target.value)) { setColumns(event.target.value) } }}></input>
+                            <input style={{ height: '50%' }} value={columns} onChange={(event) => { if (/[0-9]/.test(event.target.value)) { setColumns(parseInt(event.target.value)) } else if (event.target.value === '') { setColumns(0) } }}></input>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <p>Upgrade points: </p>
-                            <input style={{ height: '50%' }} value={('' + statPoints).charAt(0) === '0' ? statPoints : '0' + statPoints} onChange={(event) => { if (/[0-9]/.test(event.target.value)) { setStatPoints(event.target.value) } }}></input>
+                            <input style={{ height: '50%' }} value={statPoints} onChange={(event) => { if (/[0-9]/.test(event.target.value)) { setStatPoints(parseInt(event.target.value)) } else if (event.target.value === '') { setStatPoints(0) } }}></input>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <p>Actions per turn: </p>
-                            <input style={{ height: '50%' }} value={('' + actionPoints).charAt(0) === '0' ? actionPoints : '0' + actionPoints} onChange={(event) => { if (/[0-9]/.test(event.target.value)) { setActionPoints(event.target.value) } }}></input>
+                            <input style={{ height: '50%' }} value={actionPoints} onChange={(event) => { if (/[0-9]/.test(event.target.value)) { setActionPoints(parseInt(event.target.value)) } else if (event.target.value === '') { setActionPoints(0) } }}></input>
                         </div>
+                        <p style={{ color: 'red' }}>{warning}</p>
                         <button onClick={submit}>Confirm</button>
                     </section>
                     :
