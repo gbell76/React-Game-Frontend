@@ -22,12 +22,12 @@ const Home = () => {
 
     const submit = async () => {
         if (rows > 1 && columns > 1 && actionPoints > 0) {
-            const savePreferences = await fetch(`http://localhost:5000/user/${Auth.getProfile().data._id}`, {
+            const savePreferences = await fetch(`https://frozen-stream-47038-dfe3b82454fa.herokuapp.com/user/${Auth.getProfile().data._id}`, {
                 method: 'PUT',
                 body: JSON.stringify({ preferences: { rows: rows, columns: columns, statPoints: statPoints, actionPoints: actionPoints } }),
                 headers: { 'Content-Type': 'application/json' }
             })
-            const response = await fetch(`http://localhost:5000/user/${Auth.getProfile().data._id}`)
+            const response = await fetch(`https://frozen-stream-47038-dfe3b82454fa.herokuapp.com/user/${Auth.getProfile().data._id}`)
             const data = await response.json()
             setUser(data)
             localStorage.setItem('rows', data[0].preferences.rows)
@@ -43,7 +43,7 @@ const Home = () => {
 
     useEffect(() => {
         Auth.checkLoggedIn()
-        fetch(`http://localhost:5000/user/${Auth.getProfile().data._id}`)
+        fetch(`https://frozen-stream-47038-dfe3b82454fa.herokuapp.com/user/${Auth.getProfile().data._id}`)
             .then((res) => {
                 return res.json();
             })

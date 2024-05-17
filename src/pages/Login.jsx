@@ -23,13 +23,13 @@ const Login = () => {
             let response
             try {
                 if (hasAccount) {
-                    response = await fetch(`http://localhost:5000/user/login`, {
+                    response = await fetch(`https://frozen-stream-47038-dfe3b82454fa.herokuapp.com/user/login`, {
                         method: 'POST',
                         body: JSON.stringify({ username: username, password: password }),
                         headers: { 'Content-Type': 'application/json' }
                     })
                 } else {
-                    response = await fetch(`http://localhost:5000/user`, {
+                    response = await fetch(`https://frozen-stream-47038-dfe3b82454fa.herokuapp.com/user`, {
                         method: 'POST',
                         body: JSON.stringify({ username: username, password: password }),
                         headers: { 'Content-Type': 'application/json' }
